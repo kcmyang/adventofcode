@@ -1,34 +1,17 @@
-use std::io;
+use std::env;
 
 mod lib;
 
 fn main() {
-    let solutions = vec![lib::day01::sol];
+    let args: Vec<String> = env::args().collect();
 
-    println!("Enter day number:");
+    let day = args[1].parse::<usize>().unwrap();
 
-    let mut buf = String::new();
-
-    while buf.is_empty() {
-        io::stdin().read_line(&mut buf).unwrap();
+    if day < 1 || day > lib::SOLS.len() {
+        panic!("invalid day number");
     }
 
-    let day_num = match buf.trim().parse::<usize>() {
-        Ok(num) => {
-            if num < 1 {
-                panic!("Day number is too small")
-            }
-
-            if num > solutions.len() {
-                panic!("Day number is too large")
-            }
-
-            num
-        }
-        Err(..) => panic!("Could not convert to number"),
-    };
-
+    println!("Running day {}", day);
     println!();
-
-    solutions[day_num - 1]();
+    lib::SOLS[day - 1]();
 }
