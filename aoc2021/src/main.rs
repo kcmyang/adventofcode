@@ -12,6 +12,5 @@ fn main() {
     }
 
     println!("Running day {}", day);
-    println!();
     lib::SOLS[day - 1]();
 }

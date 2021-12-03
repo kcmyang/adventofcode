@@ -34,10 +34,6 @@ pub fn sol() {
 
     // part 2
     let part2 = || -> i32 {
-        if data.len() <= 3 {
-            return 0;
-        }
-
         let mut result = 0;
 
         for i in 3..data.len() {
