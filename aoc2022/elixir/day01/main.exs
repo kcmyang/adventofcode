@@ -1,14 +1,16 @@
 defmodule Day01 do
-  @spec lines_to_calorie_totals(Enumerable.t()) :: integer
+  @spec lines_to_calorie_totals(Enumerable.t()) :: [integer]
   def lines_to_calorie_totals(lines) do
-    lines
-    |> Stream.chunk_by(&(&1 == ""))
-    |> Stream.filter(&(&1 != [""]))
-    |> Stream.map(fn items ->
-      items
-      |> Stream.map(&String.to_integer/1)
-      |> Enum.sum()
-    end)
+    {_, totals} =
+      for l <- lines, reduce: {0, []} do
+        {partial_sum, totals} ->
+          case l do
+            "" -> {0, [partial_sum | totals]}
+            _ -> {partial_sum + String.to_integer(l), totals}
+          end
+      end
+
+    totals
   end
 
   @spec part1(Enumerable.t()) :: integer
