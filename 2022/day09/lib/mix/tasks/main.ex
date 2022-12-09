@@ -30,7 +30,7 @@ defmodule Mix.Tasks.Main do
 
             tail =
               case {x_head - x_tail, y_head - y_tail} do
-                {dx, dy} when abs(dx) in [0, 1] and abs(dy) in [0, 1] ->
+                {dx, dy} when abs(dx) <= 1 and abs(dy) <= 1 ->
                   tail
 
                 {0, dy} ->
@@ -84,7 +84,7 @@ defmodule Mix.Tasks.Main do
 
                   Map.update!(rope, segment, fn {x, y} ->
                     case {x_prev - x, y_prev - y} do
-                      {dx, dy} when abs(dx) in [0, 1] and abs(dy) in [0, 1] ->
+                      {dx, dy} when abs(dx) <= 1 and abs(dy) <= 1 ->
                         {x, y}
 
                       {0, dy} ->
