@@ -19,8 +19,8 @@ defmodule Solution.MixProject do
 
   defp aliases do
     [
-      input: "main input.txt",
-      sample: "main sample.txt"
+      i: "main input.txt",
+      s: "main sample.txt"
     ]
   end
 
