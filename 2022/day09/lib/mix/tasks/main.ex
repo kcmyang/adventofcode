@@ -19,7 +19,7 @@ defmodule Mix.Tasks.Main do
         for [direction, distance] <- Enum.map(lines, &String.split/1),
             _ <- 1..String.to_integer(distance),
             reduce: {{0, 0}, {0, 0}, MapSet.new([{0, 0}])} do
-          {{x_head, y_head}, {x_tail, y_tail} = tail, positions} ->
+          {{x_head, y_head}, {x_tail, y_tail}, positions} ->
             {x_head, y_head} =
               case direction do
                 "R" -> {x_head + 1, y_head}
@@ -31,13 +31,13 @@ defmodule Mix.Tasks.Main do
             tail =
               case {x_head - x_tail, y_head - y_tail} do
                 {dx, dy} when abs(dx) <= 1 and abs(dy) <= 1 ->
-                  tail
+                  {x_tail, y_tail}
 
                 {0, dy} ->
-                  {x_tail, y_tail + div(dy, 2)}
+                  {x_tail, y_tail + Main.signum(dy)}
 
                 {dx, 0} ->
-                  {x_tail + div(dx, 2), y_tail}
+                  {x_tail + Main.signum(dx), y_tail}
 
                 {dx, dy} ->
                   {x_tail + Main.signum(dx), y_tail + Main.signum(dy)}
@@ -88,10 +88,10 @@ defmodule Mix.Tasks.Main do
                         {x, y}
 
                       {0, dy} ->
-                        {x, y + div(dy, 2)}
+                        {x, y + Main.signum(dy)}
 
                       {dx, 0} ->
-                        {x + div(dx, 2), y}
+                        {x + Main.signum(dx), y}
 
                       {dx, dy} ->
                         {x + Main.signum(dx), y + Main.signum(dy)}
