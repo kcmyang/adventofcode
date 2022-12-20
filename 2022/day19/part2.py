@@ -15,7 +15,7 @@ def get_blueprint(line) -> List[int]:
     return [int(n) for n in nums]
 
 
-def quality_level(blueprint):
+def geodes(blueprint):
     '''
     Shorthand for variables:
       e -> ore
@@ -31,7 +31,7 @@ def quality_level(blueprint):
     if not solver:
         sys.exit(1)
 
-    t_max = 24
+    t_max = 32
     infinity = solver.infinity()
 
     # variables
@@ -151,13 +151,15 @@ def quality_level(blueprint):
     print(f'Solution: g_{t_max} = {obj_val}')
     print()
 
-    return index * obj_val
+    return obj_val
 
 
-blueprints = [get_blueprint(line) for line in get_lines()]
+blueprints = [get_blueprint(line) for line in get_lines()][:3]
 
-quality_levels = [quality_level(bp) for bp in blueprints]
-print(quality_levels)
+num_geodes = [geodes(bp) for bp in blueprints]
+print(num_geodes)
 
-total = sum(quality_levels)
-print(total)
+result = 1
+for n in num_geodes:
+    result *= n
+print(result)
