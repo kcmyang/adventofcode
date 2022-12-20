@@ -1,3 +1,4 @@
 .DS_Store
 2021/rust/target
 2021/haskell/**/dist-newstyle
+input.txt
