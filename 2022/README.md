@@ -12,7 +12,8 @@ Erlang/OTP 25 [erts-13.1.1] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-t
 Elixir 1.14.2 (compiled with Erlang/OTP 25)
 ```
 
-For `mix`-based solutions, run via `mix main input.txt`.
+For `mix`-based solutions, run via `mix main input.txt` or `mix part1 input.txt`, etc.
+(see `lib/mix/tasks` subdirectory for all tasks defined).
 
 ## Python
 
