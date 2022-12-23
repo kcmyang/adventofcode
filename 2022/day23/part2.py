@@ -68,19 +68,16 @@ while True:
                 proposals.setdefault(destination, []).append((row, col))
                 break
 
-    elves_new = set(elves)
+    if not proposals:
+        break
 
     # process all proposals
     for destination, sources in proposals.items():
         if len(sources) == 1:
             source = sources[0]
-            elves_new.discard(source)
-            elves_new.add(destination)
+            elves.discard(source)
+            elves.add(destination)
 
-    if elves_new == elves:
-        break
-
-    elves = elves_new
     proposals = dict()
     i += 1
 
