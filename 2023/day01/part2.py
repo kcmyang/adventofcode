@@ -11,7 +11,7 @@ lines = get_lines()
 
 total = 0
 
-words = dict(zip(['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'], range(10)))
+words = dict(zip(['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'], range(1, 10)))
 
 def match(s: str, t: str) -> bool:
     i = 0
