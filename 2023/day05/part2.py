@@ -34,16 +34,14 @@ while i < n:
 
     i += 1
 
-maps.reverse()
 
-
-def get_ranges(ranges: list[tuple[int, int, int]], maps: list[list[int]]) -> list[tuple[int, int, int]]:
+def get_ranges(ranges: list[tuple[int, int]], maps: list[list[int]]) -> list[tuple[int, int]]:
     if not maps:
         return ranges
 
     new_ranges = []
 
-    for (loc_start, start, length) in ranges:
+    for start, length in ranges:
         while length > 0:
             # the input range is either mapped to multiple output ranges, or comes after all
             # the mappings and is passed through unchanged
@@ -51,36 +49,20 @@ def get_ranges(ranges: list[tuple[int, int, int]], maps: list[list[int]]) -> lis
             new_length = length
 
             for dest, source, d in maps[0]:
-                k = start - dest
+                k = start - source
 
                 if 0 <= k < d:
-                    new_start = source + k
+                    new_start = dest + k
                     new_length = min(length, d - k)
                     break
 
-            new_ranges.append((loc_start, new_start, new_length))
-            loc_start += new_length
+            new_ranges.append((new_start, new_length))
             start += new_length
             length -= new_length
 
     return get_ranges(new_ranges, maps[1:])
 
 
-# map each location range to a seed range
-best = float('inf')
-seed_ranges = []
-
-for dest, _, d in maps[0]:
-    seed_ranges.extend(get_ranges([(dest, dest, d)], maps))
-
-# for each seed range, obtain the lowest corresponding location which maps to a starting seed
-locations = []
-
-for loc_start, start, length in seed_ranges:
-    for seed_start, seed_length in seeds:
-        if seed_start <= start < seed_start + seed_length:
-            locations.append(loc_start)
-        elif start <= seed_start < start + length:
-            locations.append(loc_start + (seed_start - start))
-
-print(min(locations))
+# map each seed range to its corresponding location range(s)
+location_ranges = get_ranges(seeds, maps)
+print(min(start for start, _ in location_ranges))
