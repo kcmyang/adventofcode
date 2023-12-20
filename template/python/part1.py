@@ -6,7 +6,8 @@ import sys
 
 
 def get_lines() -> list[str]:
-    with open(sys.argv[1]) as f:
+    filename = sys.argv[1] if len(sys.argv) > 1 else 'input.txt'
+    with open(filename) as f:
         return [line.strip() for line in f]
 
 
