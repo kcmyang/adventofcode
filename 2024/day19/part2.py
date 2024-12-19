@@ -18,10 +18,9 @@ def check(pattern: str) -> int:
     dp[0] = 1
 
     for i in range(n):
-        if dp[i]:
-            for p in pieces:
-                if pattern[i:i + len(p)] == p:
-                    dp[i + len(p)] += dp[i]
+        for p in pieces:
+            if pattern.startswith(p, i):
+                dp[i + len(p)] += dp[i]
 
     return dp[n]
 

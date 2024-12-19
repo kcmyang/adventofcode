@@ -20,7 +20,7 @@ def check(pattern: str) -> bool:
     for i in range(n):
         if dp[i]:
             for p in pieces:
-                if pattern[i:i + len(p)] == p:
+                if pattern.startswith(p, i):
                     dp[i + len(p)] = True
 
     return dp[n]
