@@ -1,8 +1,9 @@
-import collections
+import functools
 import itertools
 import math
 import re
 import sys
+from collections import Counter, defaultdict, deque
 
 
 def get_lines() -> list[str]:
