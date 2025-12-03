@@ -1,9 +1,4 @@
-import functools
-import itertools
-import math
-import re
 import sys
-from collections import Counter, defaultdict, deque
 
 
 def get_lines() -> list[str]:
@@ -31,11 +26,8 @@ for line in lines:
         else:
             dial2 = dial + v
 
-        print(dial2, end='')
         if dial2 <= 0 < dial or dial2 >= 100:
             count += 1
-            print(f' -> {count}', end='')
-        print()
 
         dial = dial2 % mod
 
