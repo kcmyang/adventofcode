@@ -18,11 +18,11 @@ for line in lines:
 
 dist = lambda x, y: sum(abs(i - j)**2 for i, j in zip(x, y))
 
-heap = []
+edges = []
 for i, p1 in enumerate(points):
     for p2 in points[i + 1:]:
-        heap.append((dist(p1, p2), p1, p2))
-heapq.heapify(heap)
+        edges.append((dist(p1, p2), p1, p2))
+edges.sort()
 
 
 def find(p, comps):
@@ -33,8 +33,8 @@ def find(p, comps):
 
 comps = [set([p]) for p in points]
 times = 10 if len(sys.argv) > 1 else 1000
-for _ in range(times):
-    _, p1, p2 = heapq.heappop(heap)
+for t in range(times):
+    _, p1, p2 = edges[t]
     i1 = find(p1, comps)
     i2 = find(p2, comps)
     if i1 == i2:
